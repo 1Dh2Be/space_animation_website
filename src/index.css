@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black font-Nunito;
+  }
+
+  li {
+    @apply cursor-pointer;
+  }
+
+  a {
+    @apply text-[#5E5E5E] text-sm;
+  }
+}
