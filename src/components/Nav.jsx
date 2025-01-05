@@ -1,6 +1,48 @@
 import { color, motion } from "motion/react";
 import { SiSpacex } from "react-icons/si";
 
+const Nav = () => {
+  return (
+    <nav className="fixed z-20 top-5 w-full mt-5 flex justify-center items-center">
+      <ul className="flex items-center gap-4 bg-[#141414] px-3 rounded-lg border border-[#383939]">
+        <li>
+          <SiSpacex color="white" size="45px" />
+        </li>
+        <li>
+          <FlipLink href="/">Home</FlipLink>
+        </li>
+        <li>
+          <FlipLink href="/">About</FlipLink>
+        </li>
+        <li>
+          <FlipLink href="/">Pricing</FlipLink>
+        </li>
+        <motion.li
+          {...anim(buttonVariants)}
+          className="relative border border-[#383939] rounded-lg overflow-hidden"
+        >
+          <motion.a
+            initial="initial"
+            whileHover="hover"
+            href="/"
+            className="relative py-1 px-3 block w-full h-full"
+          >
+            <motion.span variants={textVariant} className="relative z-10">
+              Join waitlist
+            </motion.span>
+            <motion.div
+              variants={backgroundVariants}
+              className="absolute inset-0 bg-white"
+            ></motion.div>
+          </motion.a>
+        </motion.li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Nav;
+
 const anim = (variants) => {
   return {
     initial: "initial",
@@ -98,45 +140,3 @@ const FlipLink = ({ href, children }) => {
     </motion.a>
   );
 };
-
-const Nav = () => {
-  return (
-    <nav className="w-full mt-5 flex justify-center items-center">
-      <ul className="flex items-center gap-4 bg-[#141414] px-3 rounded-lg border border-[#383939]">
-        <li>
-          <SiSpacex color="white" size="45px" />
-        </li>
-        <li>
-          <FlipLink href="/">Home</FlipLink>
-        </li>
-        <li>
-          <FlipLink href="/">About</FlipLink>
-        </li>
-        <li>
-          <FlipLink href="/">Pricing</FlipLink>
-        </li>
-        <motion.li
-          {...anim(buttonVariants)}
-          className="relative border border-[#383939] rounded-lg overflow-hidden"
-        >
-          <motion.a
-            initial="initial"
-            whileHover="hover"
-            href="/"
-            className="relative py-1 px-3 block w-full h-full"
-          >
-            <motion.span variants={textVariant} className="relative z-10">
-              Join waitlist
-            </motion.span>
-            <motion.div
-              variants={backgroundVariants}
-              className="absolute inset-0 bg-white"
-            ></motion.div>
-          </motion.a>
-        </motion.li>
-      </ul>
-    </nav>
-  );
-};
-
-export default Nav;
