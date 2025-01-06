@@ -1,13 +1,18 @@
+import ReactLenis from "lenis/react";
 import Hero from "./components/Hero";
 import Nav from "./components/Nav";
+import Schedule from "./components/Schedule";
 
 function App() {
   return (
     <>
-      <Nav />
-      <main>
-        <Hero />
-      </main>
+      <ReactLenis root>
+        <Nav />
+        <main>
+          <Hero />
+          <Schedule />
+        </main>
+      </ReactLenis>
     </>
   );
 }

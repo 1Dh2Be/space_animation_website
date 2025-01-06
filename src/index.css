@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-black font-Nunito;
+    @apply bg-zinc-950 font-Nunito;
+  }
+
+  span {
+    @apply text-white;
   }
 
   li {

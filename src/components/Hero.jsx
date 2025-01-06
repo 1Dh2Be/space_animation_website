@@ -1,30 +1,49 @@
 import {
   motion,
   useMotionTemplate,
+  useMotionValueEvent,
   useScroll,
   useTransform,
 } from "motion/react";
-import { PiMapPinSimpleFill } from "react-icons/pi";
+import { useEffect, useRef } from "react";
 
 const SECTION_HEIGHT = 1500;
 
 const Hero = () => {
+  const containerRef = useRef();
+
+  useEffect(() => {
+    console.log("Container ref:", containerRef.current);
+  }, []);
+
   return (
-    <div
-      className="relative w-full"
-      style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
-    >
-      <CenterImage />
-    </div>
+    <>
+      <div
+        ref={containerRef}
+        className="relative w-full"
+        style={{ height: `calc(${SECTION_HEIGHT}px + 100vh)` }}
+      >
+        <CenterImage containerRef={containerRef} />
+
+        <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-b from-zinc-950/0 to-zinc-950" />
+      </div>
+    </>
   );
 };
 
 export default Hero;
 
-const CenterImage = () => {
-  const { scrollYProgress } = useScroll();
+const CenterImage = ({ containerRef }) => {
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    layoutEffect: false,
+  });
 
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    console.log("Page scroll: ", latest);
+  });
+
+  const opacity = useTransform(scrollYProgress, [0.5, 1.3], [1, 0]);
   const backgroundSize = useTransform(
     scrollYProgress,
     [0, 1],
@@ -50,24 +69,5 @@ const CenterImage = () => {
         backgroundRepeat: "no-repeat",
       }}
     />
-  );
-};
-
-const schedule = () => {
-  return <div></div>;
-};
-
-const scheduleItem = ({ name, date, state }) => {
-  return (
-    <section>
-      <div>
-        <span>{name}</span>
-        <span>{date}</span>
-      </div>
-      <div>
-        <span>{state}</span>
-        <PiMapPinSimpleFill />
-      </div>
-    </section>
   );
 };
