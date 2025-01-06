@@ -4,7 +4,7 @@ import { SiSpacex } from "react-icons/si";
 const Nav = () => {
   return (
     <nav className="fixed z-20 top-5 w-full mt-5 flex justify-center items-center">
-      <ul className="flex items-center gap-4 bg-[#141414] px-3 rounded-lg border border-[#383939]">
+      <ul className="flex items-center gap-4 bg-zinc-900 px-3 rounded-lg border border-[#383939]">
         <li>
           <SiSpacex color="white" size="45px" />
         </li>
