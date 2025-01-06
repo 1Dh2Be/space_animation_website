@@ -5,16 +5,12 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const SECTION_HEIGHT = 1500;
 
 const Hero = () => {
   const containerRef = useRef();
-
-  useEffect(() => {
-    console.log("Container ref:", containerRef.current);
-  }, []);
 
   return (
     <>
@@ -37,10 +33,6 @@ const CenterImage = ({ containerRef }) => {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     layoutEffect: false,
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log("Page scroll: ", latest);
   });
 
   const opacity = useTransform(scrollYProgress, [0.5, 1.3], [1, 0]);

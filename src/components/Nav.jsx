@@ -1,9 +1,40 @@
-import { color, motion } from "motion/react";
+import { easeInOut } from "motion";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useState } from "react";
 import { SiSpacex } from "react-icons/si";
 
+const navVariant = {
+  visible: {
+    y: 0,
+  },
+  hidden: {
+    y: "-200%",
+    transition: {
+      duration: 0.35,
+      ease: easeInOut,
+    },
+  },
+};
+
 const Nav = () => {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previousVal = scrollY.getPrevious();
+    if (latest > previousVal && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
+
   return (
-    <nav className="fixed z-20 top-5 w-full mt-5 flex justify-center items-center">
+    <motion.nav
+      variants={navVariant}
+      animate={hidden ? "hidden" : "visible"}
+      className="fixed z-20 top-5 w-full mt-5 flex justify-center items-center"
+    >
       <ul className="flex items-center gap-4 bg-zinc-900 px-3 rounded-lg border border-[#383939]">
         <li>
           <SiSpacex color="white" size="45px" />
@@ -37,7 +68,7 @@ const Nav = () => {
           </motion.a>
         </motion.li>
       </ul>
-    </nav>
+    </motion.nav>
   );
 };
 
