@@ -52,3 +52,22 @@ const CenterImage = () => {
     />
   );
 };
+
+const schedule = () => {
+  return <div></div>;
+};
+
+const scheduleItem = ({ name, date, state }) => {
+  return (
+    <section>
+      <div>
+        <span>{name}</span>
+        <span>{date}</span>
+      </div>
+      <div>
+        <span>{state}</span>
+        <PiMapPinSimpleFill />
+      </div>
+    </section>
+  );
+};
